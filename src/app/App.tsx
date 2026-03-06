@@ -1,11 +1,10 @@
 import iconSvg from '@/assets/icon.svg';
 import marcaDaguaSvg from '@/assets/marca-d-agua.svg';
-import { Instagram, MessageCircle, Star } from 'lucide-react';
+import { Instagram, MapPin, MessageCircle, Star } from 'lucide-react';
 import { useState } from 'react';
 import { HelpModal } from './components/HelpModal';
 import { ImageCarousel } from './components/ImageCarousel';
 
-// ─── Link Button ─────────────────────────────────────────────────────────────
 interface LinkButtonProps {
   href?: string;
   onClick?: () => void;
@@ -63,7 +62,7 @@ function LinkButton({
 
   return (
     <Tag
-      {...(extraProps as any)}
+      {...extraProps}
       style={{ ...baseStyle, ...variantStyles[variant] }}
       className="group hover:scale-[1.015] hover:shadow-lg active:scale-[0.985]"
       onMouseEnter={(e) => {
@@ -143,7 +142,6 @@ function LinkButton({
   );
 }
 
-// ─── App ─────────────────────────────────────────────────────────────────────
 export default function App() {
   const [helpOpen, setHelpOpen] = useState(
     () => new URLSearchParams(window.location.search).get('pix') === 'true',
@@ -157,7 +155,6 @@ export default function App() {
         fontFamily: 'Inter, sans-serif',
       }}
     >
-      {/* Ambient glow blobs */}
       <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div
           style={{
@@ -186,9 +183,7 @@ export default function App() {
         />
       </div>
 
-      {/* ── MAIN CONTENT ── */}
       <div className="relative z-10 flex flex-col items-center px-4 pt-10 pb-6 min-h-screen">
-        {/* ── HEADER ── */}
         <header className="w-full max-w-md text-center mb-7 md:max-w-2xl lg:max-w-5xl">
           <div className="flex items-center justify-center mb-4">
             <img
@@ -209,12 +204,28 @@ export default function App() {
             }}
           >
             Deuzinete Ateliê transforma a roupa dos seus sonhos em realidade. Cada peça é feita sob
-            medida, são mais de{' '}
+            medida. São mais de{' '}
             <span style={{ color: '#ff0d97', fontWeight: 500 }}>15 anos de experiência</span> em
             modelagem e crepagem.
           </p>
 
-          {/* Decorative divider */}
+          <a
+            href={import.meta.env.VITE_MAPS_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 mt-3 hover:opacity-80 transition-opacity"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 'clamp(12px, 3vw, 14px)',
+              color: 'rgba(255,255,255,0.6)',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
+          >
+            <MapPin size={16} strokeWidth={2.2} style={{ color: '#ff0d97', opacity: 0.9 }} />
+            <span>Porto Franco — MA</span>
+          </a>
+
           <div className="flex items-center justify-center gap-3 mt-5">
             <span
               style={{
@@ -236,9 +247,7 @@ export default function App() {
           </div>
         </header>
 
-        {/* ── CAROUSEL + LINKS LAYOUT ── */}
         <div className="w-full max-w-md lg:max-w-5xl lg:flex lg:gap-10 lg:items-start lg:justify-center">
-          {/* ── CAROUSEL ── */}
           <div
             className="w-full flex-shrink-0 lg:w-1/2"
             style={{ height: 'clamp(220px, 33vh, 360px)' }}
@@ -246,7 +255,6 @@ export default function App() {
             <ImageCarousel />
           </div>
 
-          {/* ── LINKS ── */}
           <div className="w-full lg:flex-1 flex flex-col gap-3 mt-5 lg:mt-0 lg:justify-center">
             <p
               style={{
@@ -289,7 +297,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* ── FOOTER ── */}
       <footer
         className="relative z-10 w-full flex items-center justify-center gap-3 py-6 px-4"
         style={{
@@ -310,7 +317,6 @@ export default function App() {
         <span>2026</span>
       </footer>
 
-      {/* ── HELP MODAL ── */}
       <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
     </div>
   );
