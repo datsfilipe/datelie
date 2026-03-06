@@ -145,7 +145,9 @@ function LinkButton({
 
 // ─── App ─────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [helpOpen, setHelpOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(
+    () => new URLSearchParams(window.location.search).get('pix') === 'true',
+  );
 
   return (
     <div
